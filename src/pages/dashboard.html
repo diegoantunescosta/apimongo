@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+<script type="text/javascript">
+window.onload = function () {
+  var dataPoints = [];
+
+  var dadosUmidade = [];
+
+  var dadosSolo = [];
+
+  var dadosLuminosidade = [];
+  
+  var stockChart = new CanvasJS.StockChart("chartContainer",{
+    title: {
+        text: "Temperatura - DHT 11"
+      },
+    charts: [{      
+      data: [{        
+        type: "line",
+        dataPoints : dataPoints
+      }]
+    }],
+    navigator: {
+      slider: {
+        minimum: new Date(2021, 10, 28, 19, 00, 00),
+        maximum: Date.now()
+      }
+    }
+  }); 
+
+  var stockChartUmidade = new CanvasJS.StockChart("umidadeContainer",{
+    title: {
+        text: "Umidade do Ar - DHT 11"
+      },
+    charts: [{      
+      data: [{        
+        type: "line",
+        dataPoints : dadosUmidade
+      }]
+    }],
+    navigator: {
+      slider: {
+        minimum: new Date(2021, 10, 28, 19, 00, 00),
+        maximum: Date.now()
+      }
+    }
+  }); 
+
+  var stockChartSolo = new CanvasJS.StockChart("soloContainer",{
+    title: {
+        text: "Umidade do Solo"
+      },
+    charts: [{      
+      data: [{        
+        type: "line",
+        dataPoints : dadosSolo
+      }]
+    }],
+    navigator: {
+      slider: {
+        minimum: new Date(2021, 10, 28, 19, 00, 00),
+        maximum: Date.now()
+      }
+    }
+  }); 
+
+  var stockChartLuminosidade = new CanvasJS.StockChart("luzContainer",{
+    title: {
+        text: "Luminosidade - LDR"
+      },
+    charts: [{      
+      data: [{        
+        type: "line",
+        dataPoints : dadosLuminosidade
+      }]
+    }],
+    navigator: {
+      slider: {
+        minimum: new Date(2021, 10, 28, 19, 00, 00),
+        maximum: Date.now()
+      }
+    }
+  }); 
+
+  $.getJSON("https://menttokr.herokuapp.com/sensor/", function(data) {
+    // var dados = JSON.parse(data);
+    dados = data;
+    console.log(dados);
+    for(var i = 0; i < dados['object'].length; i++){
+      if (dados['object'][i].temperatura) {
+        dataPoints.push({x: new Date(dados['object'][i].createAt), y: Number(dados['object'][i].temperatura)});
+        dadosUmidade.push({x: new Date(dados['object'][i].createAt), y: Number(dados['object'][i].umidade)});
+        dadosSolo.push({x: new Date(dados['object'][i].createAt), y: Number(dados['object'][i].umidadeSolo)});
+        dadosLuminosidade.push({x: new Date(dados['object'][i].createAt), y: Number(dados['object'][i].luminosidade)});
+      }
+    }
+	
+    stockChart.render();
+    stockChartUmidade.render();
+    stockChartSolo.render();
+    stockChartLuminosidade.render();
+  });
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 450px; width: 100%;"></div>
+<br />
+<div id="umidadeContainer" style="height: 450px; width: 100%;"></div>
+<br />
+<div id="soloContainer" style="height: 450px; width: 100%;"></div>
+<br />
+<div id="luzContainer" style="height: 450px; width: 100%;"></div>
+</body>
+</html>
