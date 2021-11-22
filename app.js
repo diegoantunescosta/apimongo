@@ -10,7 +10,7 @@ const objectiveRouter = require("./src/routes/objective");
 const keyresultRouter = require("./src/routes/keyresult");
 const sensorRouter = require("./src/routes/sensor");
 
-mongoose.connect('mongodb+srv://diegoantunes32:140813kd@cluster0.ifc5n.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true }); 
+mongoose.connect('mongodb+srv://menttobot:mentto2020@cluster0.gmfdy.mongodb.net/okr?retryWrites=true&w=majority', { useNewUrlParser: true }); 
 mongoose.Promise = global.Promise;
 
 app.use(cors());
