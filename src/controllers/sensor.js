@@ -32,7 +32,7 @@ exports.getAll = function(req, res, next) {
     Sensor.find({ "createAt" : { $gte : new Date("2021-10-28T19:00:00Z") } }, { }, { limit: 40000, sort: { createAt: -1 } }, (err, docs) => {
         if (err) {
             res.status(500).json({
-                console.error(error.response.data);
+                console.log(err);
             })
         } else {
             res.status(200).json({
