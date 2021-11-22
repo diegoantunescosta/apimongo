@@ -85,7 +85,7 @@ window.onload = function () {
     }
   }); 
 
-  $.getJSON("https://menttokr.herokuapp.com/sensor/", function(data) {
+  $.getJSON("https://data-api-backend.herokuapp.com/sensor", function(data) {
     // var dados = JSON.parse(data);
     dados = data;
     console.log(dados);
