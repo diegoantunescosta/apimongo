@@ -10,8 +10,8 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-        user: 'mentto.edu@gmail.com', // generated ethereal user
-        pass: 'Mentto2020' // generated ethereal password
+        user: 'diegoantunescosta@gmail.com', // generated ethereal user
+        pass: '145677$$' // generated ethereal password
     },
     tls: {
         rejectUnauthorized: false 
@@ -60,7 +60,7 @@ exports.esqueciSenha = function(req, res, next) {
             `;
 
             var mailOptions = {
-                from: 'octopusprojectoficial@gmail.com',
+                from: 'diegoantunescosta@gmail.com',
                 to: email,
                 subject: 'Recuperação de Conta Octopus Project',
                 html: conteudo_email
