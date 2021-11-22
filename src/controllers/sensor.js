@@ -16,8 +16,8 @@ exports.create = function(req, res, next) {
     obj.save((err, result) => {
         if (err) {
             res.status(401).json({
-                "message": "Error: impossible save this object",
-                'error': err
+                "message": err
+                
             })
         } else {
             res.status(201).json({
